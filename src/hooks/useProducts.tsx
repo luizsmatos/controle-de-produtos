@@ -1,4 +1,4 @@
-import React, { useContext, ReactNode, createContext } from 'react';
+import { useContext, ReactNode, createContext } from 'react';
 
 interface ProductsProviderProps {
   children: ReactNode;

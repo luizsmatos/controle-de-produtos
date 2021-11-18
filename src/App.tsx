@@ -1,9 +1,14 @@
-function App() {
+import Content from './routes/Content';
+
+import GlobalStyles from './styles/global';
+
+const App = () => {
   return (
-    <h1>
-      Olá, mundo!
-    </h1>
+    <>
+      <Content />
+      <GlobalStyles />
+    </>
   );
-}
+};
 
 export default App;
