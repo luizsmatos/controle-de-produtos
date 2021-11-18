@@ -1,7 +1,7 @@
-import React from 'react';
+import Header from '../../components/Header';
 
 const FormsAddNewProduct = () => {
-  return <div>Olá</div>;
+  return <Header />;
 };
 
 export default FormsAddNewProduct;
