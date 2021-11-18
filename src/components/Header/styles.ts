@@ -1,50 +1,76 @@
 import styled from 'styled-components';
 
 const Container = styled.header`
-  height: 5rem;
-  border-bottom: 1px solid var(--gray-800);
+  width: 100%;
+  padding: 0 0 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  div {
-    max-width: 1120px;
-    height: 5rem;
-    margin: 0 auto;
-    padding: 0 2rem;
-
+  div.title {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
 
-    a {
-      display: inline-block;
-      position: relative;
-      padding: 0 0.5rem;
-      height: 5rem;
-      line-height: 5rem;
-      color: var(--gray-300);
+    div {
+      margin-left: 1rem;
 
-      transition: color 0.2s;
-
-      & + a {
-        margin-left: 2rem;
+      h1 {
+        font-size: 1.7rem;
+        color: var(--gray-100);
+        font-family: 'Roboto', sans-serif;
+        font-weight: 600;
       }
 
-      &:hover {
-        color: var(--white);
+      p {
+        font-size: 0.9rem;
+        color: var(--gray-100);
+        opacity: 0.7;
       }
+    }
+  }
 
-      &.active {
-        color: var(--white);
-        font-weight: bold;
-      }
+  div.menu {
+    padding: 0 2.25rem;
 
-      &.active::after {
-        content: '';
-        height: 3px;
-        border-radius: 3px 3px 0 0;
-        width: 100%;
-        position: absolute;
-        bottom: 1px;
-        left: 0;
-        background: var(--yellow-500);
+    nav {
+      display: flex;
+      align-items: center;
+
+      a {
+        display: inline-block;
+        position: relative;
+        padding: 0 0.5rem;
+        height: 5rem;
+        line-height: 5rem;
+        color: var(--gray-300);
+
+        transition: color 0.2s;
+
+        & + a {
+          margin-left: 2rem;
+        }
+
+        &:hover {
+          color: var(--white);
+        }
+
+        &.active {
+          color: var(--white);
+          font-weight: bold;
+        }
+
+        &.active::after {
+          content: '';
+          height: 3px;
+          border-radius: 3px 3px 0 0;
+          width: 100%;
+          position: absolute;
+          bottom: 1px;
+          left: 0;
+          background: var(--yellow-500);
+        }
       }
     }
 
