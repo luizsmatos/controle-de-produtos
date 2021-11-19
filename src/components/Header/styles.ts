@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 const Container = styled.header`
-  width: 100%;
-  padding: 0 0 8rem;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 0 5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -72,10 +73,6 @@ const Container = styled.header`
           background: var(--yellow-500);
         }
       }
-    }
-
-    button {
-      margin-left: auto;
     }
   }
 `;

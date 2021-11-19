@@ -38,7 +38,7 @@ const GlobalStyles = createGlobalStyle`
 
 body {
   background: #191920 url(${background}) no-repeat center top;
-  background-size: cover;
+  background-size: contain;
   font-family: "Poppins", sans-serif;
   color: var(--white);
 }
