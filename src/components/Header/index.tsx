@@ -20,12 +20,6 @@ const Header = () => {
             Home
           </Link>
           <Link
-            to="/produtos"
-            className={location.pathname === '/produtos' ? 'active' : ''}
-          >
-            Meus Produtos
-          </Link>
-          <Link
             to="/novo-produto"
             className={location.pathname === '/novo-produto' ? 'active' : ''}
           >

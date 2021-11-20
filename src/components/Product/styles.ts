@@ -9,10 +9,14 @@ const Container = styled.div<ContainerProps>`
   border-radius: 0.5rem;
 
   header {
-    background: #ffb84d;
+    background: var(--white);
     border-radius: 0.5rem 0.5rem 0px 0px;
+    height: 192px;
     overflow: hidden;
     transition: 0.3s opacity;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     ${(props) =>
       !props.available &&
@@ -21,13 +25,16 @@ const Container = styled.div<ContainerProps>`
       `};
 
     img {
+      background-size: cover;
+      max-width: 450px;
+      max-height: 192px;
       pointer-events: none;
       user-select: none;
     }
   }
 
   section.body {
-    padding: 30px;
+    padding: 1.9rem;
 
     h2 {
       color: #3d3d4d;
@@ -35,15 +42,25 @@ const Container = styled.div<ContainerProps>`
 
     p {
       color: #3d3d4d;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 0.8rem;
+      opacity: 0.6;
 
-      margin-top: 16px;
+      margin-top: 0.5rem;
+
+      & + p {
+        margin-top: 0.2rem;
+      }
     }
 
-    .price {
+    p.price {
+      margin-top: 1rem;
       font-style: normal;
       font-size: 1.5rem;
       line-height: 2rem;
       color: #39b100;
+      opacity: 1;
 
       b {
         font-weight: 600;

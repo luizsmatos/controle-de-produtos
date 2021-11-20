@@ -1,9 +1,11 @@
+import Container from './styles';
+
 const NotFound = () => {
   return (
-    <div>
+    <Container>
       <h1>404</h1>
       <p>Página não encontrada!</p>
-    </div>
+    </Container>
   );
 };
 

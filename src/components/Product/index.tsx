@@ -46,9 +46,9 @@ const Product = ({ product }: ProductProps) => {
       </header>
       <section className="body">
         <h2>{product.name}</h2>
-        <span>Codigo: {product.productId} </span>
-        <span> Categoria: {product.name}</span>
-        <p>{product.description}</p>
+        <p>Código: {product.productId} </p>
+        <p>Categoria: {product.name}</p>
+        <p>Fornecedor: {product.supplier}</p>
         <p className="price">
           <b>{formatPrice(product.price)}</b>
         </p>
