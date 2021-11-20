@@ -27,11 +27,11 @@ const Input = ({ name, label, placeholder, ...rest }: InputProps) => {
 
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
-
     setIsFilled(!!inputRef.current?.value);
   }, []);
 
   useEffect(() => {
+    // Registra o campo no unform
     registerField({
       name: fieldName,
       ref: inputRef.current,

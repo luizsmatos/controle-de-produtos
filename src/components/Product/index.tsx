@@ -12,22 +12,31 @@ interface ProductProps {
 
 const Product = ({ product }: ProductProps) => {
   const [isAvailable, setIsAvailable] = useState(product.available);
-  const { removeProduct, products, setProducts } = useProducts();
+  const { removeProduct, products, setProducts, toggleEditModal, editProduct } =
+    useProducts();
 
-  const toggleAvailable = () => {
+  // Procura o produto pelo id e atualiza o estado de disponibilidade
+  const toggleAvailable = (id: string) => {
     const uptadedProducts = [...products];
-
-    const uptadedAvailable = uptadedProducts.map((p) => ({
-      ...p,
-      available: !isAvailable,
-    }));
-
+    const uptadedAvailable = uptadedProducts.map((p) => {
+      if (p.productId === id) {
+        return { ...p, available: !p.available };
+      }
+      return p;
+    });
     setProducts(uptadedAvailable);
     setIsAvailable(!isAvailable);
   };
 
+  // Remove o produto pelo id
   const handleRemoveProduct = (id: string) => {
     removeProduct(id);
+  };
+
+  // Abre o modal de edição e carrega o produto no formulário
+  const handleEditProduct = (id: string) => {
+    toggleEditModal();
+    editProduct(id);
   };
 
   return (
@@ -49,7 +58,7 @@ const Product = ({ product }: ProductProps) => {
           <button
             type="button"
             className="icon"
-            // onClick={setEditingproduct}
+            onClick={() => handleEditProduct(product.productId)}
             data-testid={`edit-product-${product.productId}`}
           >
             <FiEdit3 size={20} />
@@ -76,7 +85,7 @@ const Product = ({ product }: ProductProps) => {
               id={`available-switch-${product.productId}`}
               type="checkbox"
               checked={isAvailable}
-              onChange={() => toggleAvailable()}
+              onChange={() => toggleAvailable(product.productId)}
               data-testid={`change-status-product-${product.productId}`}
             />
             <span className="slider" />

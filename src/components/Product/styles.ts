@@ -69,7 +69,11 @@ const Container = styled.div<ContainerProps>`
         border-radius: 0.5rem;
         display: flex;
         border: none;
-        transition: 0.1s;
+        transition: filter 0.2s;
+
+        &:hover {
+          filter: brightness(0.8);
+        }
 
         svg {
           color: #3d3d4d;
