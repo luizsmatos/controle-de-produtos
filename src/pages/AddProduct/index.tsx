@@ -1,12 +1,12 @@
 /* eslint-disable no-restricted-globals */
 import Header from '../../components/Header';
-import Form from '../../components/Form';
+import FormAddProduct from '../../components/FormAddProduct';
 
 const AddProduct = () => {
   return (
     <>
       <Header />
-      <Form />
+      <FormAddProduct />
     </>
   );
 };

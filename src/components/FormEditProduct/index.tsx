@@ -12,13 +12,14 @@ import FormContainer from './styles';
 import Products from '../../types';
 
 const Form = () => {
-  const { addProduct } = useProducts();
+  const { editingProduct, handleEditedProduct } = useProducts();
   const formRef = createRef<FormHandles>();
 
   const handleSubmit: SubmitHandler<Products> = async (data: Products) => {
     try {
       formRef.current?.setErrors({});
 
+      // Validação do formulário
       const schema = Yup.object().shape({
         productId: Yup.string().required('Campo obrigatório!'),
         image: Yup.string()
@@ -40,8 +41,14 @@ const Form = () => {
       });
 
       formRef.current?.reset();
-      addProduct(data);
+
+      // Atualiza o produto com as informações do formulário
+      handleEditedProduct({
+        ...data,
+        available: editingProduct.available,
+      });
     } catch (err) {
+      // Se o erro for de validação, mostra os erros
       if (err instanceof Yup.ValidationError) {
         const validationErrors = {} as Record<string, string>;
         err.inner.forEach(({ path, message }) => {
@@ -55,9 +62,13 @@ const Form = () => {
   };
 
   return (
-    <FormContainer ref={formRef} onSubmit={handleSubmit}>
+    <FormContainer
+      ref={formRef}
+      initialData={editingProduct}
+      onSubmit={handleSubmit}
+    >
       <h1>
-        Novo Produto <BsBoxSeam color="#39b100" size={40} />
+        Editar Produto <BsBoxSeam color="#eba417" size={40} />
       </h1>
       <Input name="image" label="Imagem" placeholder="Insira a URL da imagem" />
 
@@ -81,7 +92,7 @@ const Form = () => {
 
       <Input name="price" label="Preço" placeholder="Exemplo: 19.90" />
       <button type="submit">
-        <p className="text">Adicionar Produto</p>
+        <p className="text">Editar Produto</p>
         <div className="icon">
           <FiCheckSquare size={24} />
         </div>

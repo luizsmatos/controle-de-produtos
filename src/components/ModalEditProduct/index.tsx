@@ -1,29 +1,17 @@
 import Modal from '../Modal';
-import Form from '../Form';
+import FormEditProduct from '../FormEditProduct';
 
-import Products from '../../types';
-
-interface ModalEditFoodProps {
+interface ModalEditProductsProps {
   isOpen: boolean;
   setIsOpen: () => void;
-  handleUpdateProduct: (data: Products) => void;
 }
 
-const ModalEditFood = ({
-  isOpen,
-  setIsOpen,
-  handleUpdateProduct,
-}: ModalEditFoodProps) => {
-  const handleSubmit = (data: Products) => {
-    handleUpdateProduct(data);
-    setIsOpen();
-  };
-
+const ModalEditProduct = ({ isOpen, setIsOpen }: ModalEditProductsProps) => {
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <Form />
+      <FormEditProduct />
     </Modal>
   );
 };
 
-export default ModalEditFood;
+export default ModalEditProduct;
