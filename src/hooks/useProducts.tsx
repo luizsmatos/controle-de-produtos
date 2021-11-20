@@ -15,6 +15,11 @@ interface ProductsContext {
   setProducts: (products: Products[]) => void;
   addProduct: (product: Products) => void;
   removeProduct: (id: string) => void;
+  editModalOpen: boolean;
+  toggleEditModal: () => void;
+  editProduct: (id: string) => void;
+  editingProduct: Products;
+  handleEditedProduct: (product: Products) => void;
 }
 
 interface ProductsProviderProps {
@@ -33,7 +38,11 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
 
     return [];
   });
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState({} as Products);
 
+  // Atualiza o localStorage, sempre que o estado products for alterado, LINHA 44 a LINHA 57.
+  // comparando o estado anterior com o atual.
   const prevProductsRef = useRef<Products[]>(products);
 
   useEffect(() => {
@@ -48,6 +57,7 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
     }
   }, [products, productsPreviousValue]);
 
+  // Adiciona um novo produto, com as informações do formulário.
   const addProduct = (product: Products) => {
     try {
       const updatedProducts = [...products];
@@ -71,6 +81,7 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
     }
   };
 
+  // Remove o produto pelo id
   const removeProduct = (productId: string) => {
     try {
       const productExists = products.find((p) => p.productId === productId);
@@ -87,11 +98,49 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
     }
   };
 
+  // Salva o produto editado no estado products.
+  const handleEditedProduct = (product: Products) => {
+    try {
+      const updatedProducts = products.map((p) =>
+        p.productId === product.productId ? product : p
+      );
+      setProducts(updatedProducts);
+      setEditModalOpen(!editModalOpen);
+      toast.success('Produto editado com sucesso');
+    } catch (error) {
+      toast.error('Erro na edição do produto');
+    }
+  };
+
+  // Abre o modal de edição e carrega o produto no formulário, atraves do id.
+  const editProduct = (productId: string) => {
+    try {
+      const productExists = products.find((p) => p.productId === productId);
+      if (productExists) {
+        setEditingProduct(productExists);
+      } else {
+        toast.error('Erro na edição do produto');
+      }
+    } catch (error) {
+      toast.error('Erro na edição do produto');
+    }
+  };
+
+  // Abre o modal de edição.
+  const toggleEditModal = () => {
+    setEditModalOpen(!editModalOpen);
+  };
+
   const productsContext = {
     products,
     setProducts,
     addProduct,
     removeProduct,
+    editModalOpen,
+    toggleEditModal,
+    editProduct,
+    editingProduct,
+    handleEditedProduct,
   };
 
   return (
