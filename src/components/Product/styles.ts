@@ -7,6 +7,9 @@ interface ContainerProps {
 const Container = styled.div<ContainerProps>`
   background: #f0f0f5;
   border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   header {
     background: var(--white);
