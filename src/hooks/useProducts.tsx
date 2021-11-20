@@ -12,6 +12,7 @@ import Products from '../types';
 
 interface ProductsContext {
   products: Products[];
+  setProducts: (products: Products[]) => void;
   addProduct: (product: Products) => void;
   removeProduct: (id: string) => void;
 }
@@ -86,18 +87,9 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
     }
   };
 
-  // const productsContext = useMemo(
-  //   () =>
-  //     ({
-  //       products,
-  //       addProduct,
-  //       removeProduct,
-  //     } as ProductsContext),
-  //   []
-  // );
-
   const productsContext = {
     products,
+    setProducts,
     addProduct,
     removeProduct,
   };

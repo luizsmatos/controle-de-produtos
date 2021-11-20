@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FiEdit3, FiTrash } from 'react-icons/fi';
+import { useProducts } from '../../hooks/useProducts';
 import Products from '../../types';
 import formatPrice from '../../util/format';
 
@@ -10,20 +11,24 @@ interface ProductProps {
 }
 
 const Product = ({ product }: ProductProps) => {
-  const [isAvailable, setIsAvailable] = useState(true);
+  const [isAvailable, setIsAvailable] = useState(product.available);
+  const { removeProduct, products, setProducts } = useProducts();
 
-  // const toggleAvailable = async () => {
-  //   await api.put(`/products/${product.id}`, {
-  //     ...product,
-  //     available: !isAvailable,
-  //   });
+  const toggleAvailable = () => {
+    const uptadedProducts = [...products];
 
-  //   setIsAvailable(!isAvailable);
-  // };
+    const uptadedAvailable = uptadedProducts.map((p) => ({
+      ...p,
+      available: !isAvailable,
+    }));
 
-  // const setEditingProduct = () => {
-  //   handleEditProduct(product);
-  // };
+    setProducts(uptadedAvailable);
+    setIsAvailable(!isAvailable);
+  };
+
+  const handleRemoveProduct = (id: string) => {
+    removeProduct(id);
+  };
 
   return (
     <Container available={isAvailable}>
@@ -32,7 +37,7 @@ const Product = ({ product }: ProductProps) => {
       </header>
       <section className="body">
         <h2>{product.name}</h2>
-        <span>Codigo: {product.id} </span>
+        <span>Codigo: {product.productId} </span>
         <span> Categoria: {product.name}</span>
         <p>{product.description}</p>
         <p className="price">
@@ -45,7 +50,7 @@ const Product = ({ product }: ProductProps) => {
             type="button"
             className="icon"
             // onClick={setEditingproduct}
-            data-testid={`edit-product-${product.id}`}
+            data-testid={`edit-product-${product.productId}`}
           >
             <FiEdit3 size={20} />
           </button>
@@ -53,8 +58,8 @@ const Product = ({ product }: ProductProps) => {
           <button
             type="button"
             className="icon"
-            // onClick={() => handleDelete(product.id)}
-            data-testid={`remove-product-${product.id}`}
+            onClick={() => handleRemoveProduct(product.productId)}
+            data-testid={`remove-product-${product.productId}`}
           >
             <FiTrash size={20} />
           </button>
@@ -63,13 +68,16 @@ const Product = ({ product }: ProductProps) => {
         <div className="availability-container">
           <p>{isAvailable ? 'Disponível' : 'Indisponível'}</p>
 
-          <label htmlFor={`available-switch-${product.id}`} className="switch">
+          <label
+            htmlFor={`available-switch-${product.productId}`}
+            className="switch"
+          >
             <input
-              id={`available-switch-${product.id}`}
+              id={`available-switch-${product.productId}`}
               type="checkbox"
               checked={isAvailable}
-              onChange={() => setIsAvailable(!isAvailable)}
-              data-testid={`change-status-product-${product.id}`}
+              onChange={() => toggleAvailable()}
+              data-testid={`change-status-product-${product.productId}`}
             />
             <span className="slider" />
           </label>
