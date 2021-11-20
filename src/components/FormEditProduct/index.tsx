@@ -45,6 +45,7 @@ const Form = () => {
       // Atualiza o produto com as informações do formulário
       handleEditedProduct({
         ...data,
+        id: editingProduct.id,
         available: editingProduct.available,
       });
     } catch (err) {

@@ -16,10 +16,10 @@ const Product = ({ product }: ProductProps) => {
     useProducts();
 
   // Procura o produto pelo id e atualiza o estado de disponibilidade
-  const toggleAvailable = (id: string) => {
+  const toggleAvailable = (id: number) => {
     const uptadedProducts = [...products];
     const uptadedAvailable = uptadedProducts.map((p) => {
-      if (p.productId === id) {
+      if (p.id === id) {
         return { ...p, available: !p.available };
       }
       return p;
@@ -29,12 +29,12 @@ const Product = ({ product }: ProductProps) => {
   };
 
   // Remove o produto pelo id
-  const handleRemoveProduct = (id: string) => {
+  const handleRemoveProduct = (id: number) => {
     removeProduct(id);
   };
 
   // Abre o modal de edição e carrega o produto no formulário
-  const handleEditProduct = (id: string) => {
+  const handleEditProduct = (id: number) => {
     toggleEditModal();
     editProduct(id);
   };
@@ -47,7 +47,7 @@ const Product = ({ product }: ProductProps) => {
       <section className="body">
         <h2>{product.name}</h2>
         <p>Código: {product.productId} </p>
-        <p>Categoria: {product.name}</p>
+        <p>Categoria: {product.category}</p>
         <p>Fornecedor: {product.supplier}</p>
         <p className="price">
           <b>{formatPrice(product.price)}</b>
@@ -58,7 +58,7 @@ const Product = ({ product }: ProductProps) => {
           <button
             type="button"
             className="icon"
-            onClick={() => handleEditProduct(product.productId)}
+            onClick={() => handleEditProduct(product.id)}
             data-testid={`edit-product-${product.productId}`}
           >
             <FiEdit3 size={20} />
@@ -67,8 +67,8 @@ const Product = ({ product }: ProductProps) => {
           <button
             type="button"
             className="icon"
-            onClick={() => handleRemoveProduct(product.productId)}
-            data-testid={`remove-product-${product.productId}`}
+            onClick={() => handleRemoveProduct(product.id)}
+            data-testid={`remove-product-${product.id}`}
           >
             <FiTrash size={20} />
           </button>
@@ -85,7 +85,7 @@ const Product = ({ product }: ProductProps) => {
               id={`available-switch-${product.productId}`}
               type="checkbox"
               checked={isAvailable}
-              onChange={() => toggleAvailable(product.productId)}
+              onChange={() => toggleAvailable(product.id)}
               data-testid={`change-status-product-${product.productId}`}
             />
             <span className="slider" />

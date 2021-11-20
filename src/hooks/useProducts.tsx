@@ -14,12 +14,13 @@ interface ProductsContext {
   products: Products[];
   setProducts: (products: Products[]) => void;
   addProduct: (product: Products) => void;
-  removeProduct: (id: string) => void;
+  removeProduct: (id: number) => void;
   editModalOpen: boolean;
   toggleEditModal: () => void;
-  editProduct: (id: string) => void;
+  editProduct: (id: number) => void;
   editingProduct: Products;
   handleEditedProduct: (product: Products) => void;
+  id: number;
 }
 
 interface ProductsProviderProps {
@@ -29,6 +30,20 @@ interface ProductsProviderProps {
 const ProductsContext = createContext({} as ProductsContext);
 
 export const ProductsProvider = ({ children }: ProductsProviderProps) => {
+  const [id, setId] = useState(() => {
+    const storagedproducts = localStorage.getItem('@Controle:products');
+
+    if (storagedproducts) {
+      const parsedProducts = JSON.parse(storagedproducts);
+
+      if (parsedProducts.length > 0) {
+        const getTheLastId = JSON.parse(storagedproducts).pop();
+        return getTheLastId.id + 1;
+      }
+    }
+
+    return 0;
+  });
   const [products, setProducts] = useState<Products[]>(() => {
     const storagedproducts = localStorage.getItem('@Controle:products');
 
@@ -75,6 +90,7 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
       };
       updatedProducts.push(newProduct);
       setProducts(updatedProducts);
+      setId(id + 1);
       toast.success('Produto cadastrado com sucesso');
     } catch (error) {
       toast.error('Erro na adição do produto');
@@ -82,13 +98,11 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
   };
 
   // Remove o produto pelo id
-  const removeProduct = (productId: string) => {
+  const removeProduct = (pId: number) => {
     try {
-      const productExists = products.find((p) => p.productId === productId);
+      const productExists = products.find((p) => p.id === pId);
       if (productExists) {
-        const updatedProducts = products.filter(
-          (p) => p.productId !== productId
-        );
+        const updatedProducts = products.filter((p) => p.id !== pId);
         setProducts(updatedProducts);
       } else {
         toast.error('Erro na remoção do produto');
@@ -101,11 +115,25 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
   // Salva o produto editado no estado products.
   const handleEditedProduct = (product: Products) => {
     try {
-      const updatedProducts = products.map((p) =>
-        p.productId === product.productId ? product : p
+      const updatedProducts = [...products];
+      const getProduct = updatedProducts.find((p) => p.id === product.id);
+
+      // Verifica se o produto editado possui um id já existente.
+      if (product.productId !== getProduct?.productId) {
+        const productIdAlreadyExists = updatedProducts.find(
+          (p) => p.productId === product.productId
+        );
+        if (productIdAlreadyExists) {
+          toast.error('Produto já cadastrado');
+          return;
+        }
+      }
+      const editedProducts = updatedProducts.map((p) =>
+        p.id === product.id ? product : p
       );
-      setProducts(updatedProducts);
+      setProducts(editedProducts);
       setEditModalOpen(!editModalOpen);
+
       toast.success('Produto editado com sucesso');
     } catch (error) {
       toast.error('Erro na edição do produto');
@@ -113,9 +141,9 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
   };
 
   // Abre o modal de edição e carrega o produto no formulário, atraves do id.
-  const editProduct = (productId: string) => {
+  const editProduct = (pId: number) => {
     try {
-      const productExists = products.find((p) => p.productId === productId);
+      const productExists = products.find((p) => p.id === pId);
       if (productExists) {
         setEditingProduct(productExists);
       } else {
@@ -141,6 +169,7 @@ export const ProductsProvider = ({ children }: ProductsProviderProps) => {
     editProduct,
     editingProduct,
     handleEditedProduct,
+    id,
   };
 
   return (

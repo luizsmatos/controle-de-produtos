@@ -12,7 +12,7 @@ import FormContainer from './styles';
 import Products from '../../types';
 
 const Form = () => {
-  const { addProduct } = useProducts();
+  const { addProduct, id } = useProducts();
   const formRef = createRef<FormHandles>();
 
   const handleSubmit: SubmitHandler<Products> = async (data: Products) => {
@@ -42,6 +42,7 @@ const Form = () => {
       formRef.current?.reset();
       addProduct({
         ...data,
+        id,
         available: true,
       });
     } catch (err) {
