@@ -6,15 +6,13 @@ interface ContainerProps {
 
 const Container = styled.div<ContainerProps>`
   background: #f0f0f5;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 
   header {
     background: #ffb84d;
-    border-radius: 8px 8px 0px 0px;
-    height: 192px;
+    border-radius: 0.5rem 0.5rem 0px 0px;
     overflow: hidden;
     transition: 0.3s opacity;
-    text-align: center;
 
     ${(props) =>
       !props.available &&
@@ -43,8 +41,8 @@ const Container = styled.div<ContainerProps>`
 
     .price {
       font-style: normal;
-      font-size: 24px;
-      line-height: 34px;
+      font-size: 1.5rem;
+      line-height: 2rem;
       color: #39b100;
 
       b {
@@ -58,17 +56,17 @@ const Container = styled.div<ContainerProps>`
     justify-content: space-between;
     align-items: center;
 
-    padding: 20px 30px;
+    padding: 1.2rem 2rem;
     background: #e4e4eb;
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 0 0 0.5rem 0.5rem;
 
     div.icon-container {
       display: flex;
 
       button {
         background: #fff;
-        padding: 10px;
-        border-radius: 8px;
+        padding: 0.7rem;
+        border-radius: 0.5rem;
         display: flex;
         border: none;
         transition: 0.1s;
@@ -78,7 +76,7 @@ const Container = styled.div<ContainerProps>`
         }
 
         & + button {
-          margin-left: 6px;
+          margin-left: 0.4rem;
         }
       }
     }
@@ -94,9 +92,9 @@ const Container = styled.div<ContainerProps>`
       .switch {
         position: relative;
         display: inline-block;
-        width: 88px;
-        height: 32px;
-        margin-left: 12px;
+        width: 5.5rem;
+        height: 2rem;
+        margin-left: 0.8rem;
 
         & input {
           opacity: 0;
@@ -114,19 +112,19 @@ const Container = styled.div<ContainerProps>`
           background-color: #c72828;
           -webkit-transition: 0.4s;
           transition: 0.4s;
-          border-radius: 16px;
+          border-radius: 1rem;
 
           &:before {
             position: absolute;
             content: '';
-            height: 20px;
-            width: 40px;
-            left: 8px;
-            bottom: 6px;
+            height: 1.2rem;
+            width: 2.5rem;
+            left: 0.5rem;
+            bottom: 0.4rem;
             background-color: white;
             -webkit-transition: 0.4s;
             transition: 0.4s;
-            border-radius: 10px;
+            border-radius: 0.7rem;
           }
         }
 
@@ -139,9 +137,9 @@ const Container = styled.div<ContainerProps>`
         }
 
         input:checked + .slider:before {
-          -webkit-transform: translateX(32px);
-          -ms-transform: translateX(32px);
-          transform: translateX(32px);
+          -webkit-transform: translateX(2rem);
+          -ms-transform: translateX(2rem);
+          transform: translateX(2rem);
         }
       }
     }

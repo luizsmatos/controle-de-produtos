@@ -33,6 +33,14 @@ const Container = styled.div<ContainerProps>`
       }
     }
 
+    input[type='number']::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+    input[type='number'] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+
     input {
       flex: 1;
       background: transparent;
