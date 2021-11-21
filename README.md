@@ -24,6 +24,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - React-Router
 - React-Modal
 - Toastify
+- Unform
 - Styled-components
 
 ## 🚀 Como executar
