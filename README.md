@@ -27,6 +27,16 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - Unform
 - Styled-components
 
+## 📚 Desenvolvimento
+
+Durante o desenvolvimento a construção do layout foi pensando em trazer algo simples e intuitivo, para que o usuário sinta-se confortável durante a sua experiência, para esse objetivo ser alcançado, foi utilizado a biblioteca [Styled-components](https://www.styled-components.com/), que permite a criação de estilos para componentes React, de forma mais perfomatica e dinâmica, além do `Style-Componets`, foi utilizado o [Toastify](https://fkhadra.github.io/react-toastify/introduction) para exibir mensagens de erro, e o [Unform](https://unform.dev/) para a criação de formulários de forma perfomatica, e o [Yup](https://github.com/jquense/yup) para a validação dos campos do formulário.
+
+Afim de zelar pela experiência do usuário, quando o mesmo decidi editar um produto, é exibido um Modal, da biblioteca [React-Modal](https://github.com/reactjs/react-modal), onde é carregado todas as informações do produto.
+
+O `ContextAPI` foi utilizado para a criação de um contexto global, onde será possível acessar os dados do estoque, para que o usuário possa adicionar, editar ou remover um produto. Perpetuando as informações no localStorage.
+
+Para garantir uma padronização de código, foi utilizado o [ESLint](https://eslint.org/) para a validação, e o [Prettier](https://prettier.io/), para a formatação.
+
 ## 🚀 Como executar
 
 Clone o projeto e acesse a pasta do mesmo.
