@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { Form as Unform } from '@unform/web';
 
 const FormContainer = styled(Unform)`
-  max-width: 1120px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 3rem 2.5rem;
+  padding: 1rem 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
